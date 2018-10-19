@@ -1,0 +1,39 @@
+//--DB ---
+// add tags table AND add junction table notes_tags
+// -- tags has id AND name
+// -- notes_tags has two columns ==> tags_id AND notes_id 
+
+--tags router--
+// create routes/tags.js
+-- set up 
+  -- express 
+  -- router = express.Router()
+  -- knex 
+--export.modules = router
+
+--update server.js --
+  -- initialize tagRouter
+  -- mount tagRouter (app.use)
+
+
+-----------------------------------
+
+in tags.js -->
+  -- implement CRUD operations 
+  -- get, get id, post, put id, delete id
+
+
+notes table 
+
+id | title 
+1     hote_note
+========================
+tags table 
+
+id | name
+100   hot_dog
+
+notes_tags 
+
+note_id | tag_id
+ 1          100
