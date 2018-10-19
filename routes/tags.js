@@ -38,7 +38,7 @@ router.post('/', (req, res, next) => {
 
   if (!name) {
     const err = new Error('missing `tag` name');
-    err.status(400);
+    err.status = 400;
     return next(err);
   }
 
@@ -58,6 +58,38 @@ router.post('/', (req, res, next) => {
       }
     })
     .catch(err => next(err));
+});
+
+router.put('/:id', (req, res, next) => {
+  const { name } = req.body;
+  // const updateObj = {id : req.params.id, name : req.body.name};
+  if(!name) {
+    const err = new Error ('No tag name, no go!');
+    err.status = 404;
+    return next(err);
+  }
+  knex('tags')
+    .update({name : name})
+    // .update(updateObj)
+    .where('id', req.params.id)
+    .returning(['id', 'name'])
+    .then(([result]) => {
+      if(result) {
+        res.json(result);
+      } else next();
+    })
+    .catch(err => next(err));
+});
+
+
+router.delete('/:id', (req, res, next) => {
+  const id = req.params.id;
+
+  knex('tags')
+    .where('id', id)
+    .del()
+    .then(() => res.status(204).end())
+    .catch((err) => next(err));
 });
 
 module.exports = router;

@@ -48,3 +48,35 @@ in tags.js --> -- implement CRUD operations -- get, get id, post, put id, delete
   - res.location(`${req.originalUrl}/${result.id}`).status(201).json(result);
 
 4. catch an err
+
+## Update a tag PUT 
+1. Put request with url '/:id' and will pass the req, res, next 
+2. const {name} = req.body  || name === 'new tag2'
+3. knex('tags')
+  .update({name: name})
+  .where('id',req.params.id)
+  
+
+
+
+
+
+
+
+const updateObj = { name: req.body.name, id : req.params.id}
+
+2. const newName = {name : req.body.name}, const id = req.params.id
+3. validate input ==> !newName  new Error ('you forgot to put in a name!')
+  - err.status(404)
+  - return next(err)
+4. knex('tags).update(newName)
+    .where(id, id)
+
+
+
+## Delete a Tag
+1. Delete request with the url '/:id' and will pass the req, res, next 
+2. store req.params.id in const id
+3. knex('tags') where id is id and then .del()
+4. res.status(204).end()
+5. catch an err
