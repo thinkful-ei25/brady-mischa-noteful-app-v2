@@ -1,5 +1,21 @@
 # noteful-app-v2
 
+**Connecting Notes with Tags**
+##Get all Notes
+
+1. left join notes_tags WHERE note_id = id
+2. left join tags WHERE tags.id = tag_id
+3. use queryBuilder TO search for tags 
+  - modify if(tagId) querybuider.
+4. add hydration 
+
+##Get note by id 
+
+1. 
+
+
+##ADD POST ! MOVE ON NOW
+
 **DB**
 
 //--DB --- // add tags table AND add junction table notes_tags // -- tags has id AND name // -- notes_tags has two columns ==> tags_id AND notes_id
@@ -55,7 +71,8 @@ in tags.js --> -- implement CRUD operations -- get, get id, post, put id, delete
 3. knex('tags')
   .update({name: name})
   .where('id',req.params.id)
-  
+  .returning(['id', 'name'])
+  .then(([result]) => res.json(result))
 
 
 
