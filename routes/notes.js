@@ -18,7 +18,7 @@ router.get('/', (req, res, next) => {
     .leftJoin('folders', 'notes.folder_id', 'folders.id')
     .leftJoin('notes_tags', 'note_id', 'notes.id')
     .leftJoin('tags', 'notes_tags.tag_id', 'tags.id')
-    // console.log("notes select ", notesSelect());
+
     .modify(function (queryBuilder) {
       if (searchTerm) {
         queryBuilder.where('title', 'like', `%${searchTerm}%`);
@@ -59,7 +59,7 @@ router.get('/:id', (req, res, next) => {
       if (result) {
         console.log(result);
         const hydrated = hydrate(result);
-        res.json(hydrated);
+        res.json(hydrated[0]);
       } else {
         next();
       }
