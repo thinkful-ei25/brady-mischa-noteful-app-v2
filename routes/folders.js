@@ -77,6 +77,7 @@ router.put('/:id', (req, res, next) => {
     .where('id', req.params.id)
     .returning(['id', 'name'])
     .then(([result]) => {
+      // console.log("see invalid key response: ", result);
       if (result) {
         res.json(result);
       } else {

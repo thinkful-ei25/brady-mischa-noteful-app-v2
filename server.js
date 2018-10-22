@@ -32,6 +32,7 @@ app.use('/api/tags', tagsRouter);
 
 // Custom 404 Not Found route handler
 app.use((req, res, next) => {
+  console.log('called');
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -49,10 +50,14 @@ app.use((err, req, res, next) => {
 });
 
 // Listen for incoming connections
-app
-  .listen(PORT, function() {
-    console.info(`Server listening on ${this.address().port}`);
-  })
-  .on('error', err => {
-    console.error(err);
-  });
+if(require.main === module){
+  app
+    .listen(PORT, function() {
+      console.info(`Server listening on ${this.address().port}`);
+    })
+    .on('error', err => {
+      console.error(err);
+    });
+}
+
+module.exports = app;

@@ -108,10 +108,10 @@ INSERT INTO tags (name) VALUES
 
 INSERT INTO notes_tags (note_id, tag_id) VALUES (1009, 1);
 
-SELECT notes.id as noteId, notes.title as notesName, folders.name as folderName, tags.name as tagNames FROM notes 
-LEFT JOIN folders on notes.folder_id = folders.id
-LEFT JOIN notes_tags on notes.id = notes_tags.note_id
-LEFT JOIN tags on notes_tags.tag_id = tags.id;
+-- SELECT notes.id as noteId, notes.title as notesName, folders.name as folderName, tags.name as tagNames FROM notes 
+-- LEFT JOIN folders on notes.folder_id = folders.id
+-- LEFT JOIN notes_tags on notes.id = notes_tags.note_id
+-- LEFT JOIN tags on notes_tags.tag_id = tags.id;
 
 
 -- -- get all notes

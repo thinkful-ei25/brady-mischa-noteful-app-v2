@@ -4,6 +4,11 @@
 const noteful = (function () {
 
   function render() {
+    // display first note if none has been selected
+    if($.isEmptyObject(store.currentNote) && !store.adding){
+      store.notes.length > 0 ? store.currentNote = store.notes[0] : store.currentNote = {};
+    }
+
     const notesList = generateNotesList(store.notes, store.currentNote);
     $('.js-notes-list').html(notesList);
 
@@ -142,8 +147,8 @@ const noteful = (function () {
 
   function handleNoteFormSubmit() {
     $('.js-note-edit-form').on('submit', function (event) {
+      store.adding = false;
       event.preventDefault();
-
       const editForm = $(event.currentTarget);
       const noteObj = {
         id: store.currentNote.id,
@@ -179,6 +184,7 @@ const noteful = (function () {
 
   function handleNoteStartNewSubmit() {
     $('.js-start-new-note-form').on('submit', event => {
+      store.adding = true;
       event.preventDefault();
       store.currentNote = {};
       render();
@@ -302,7 +308,7 @@ const noteful = (function () {
           render();
         })
         .catch(err => {
-          console.error(err);
+          $('.js-error-message').text(err.responseJSON.message);
         });
     });
   }
